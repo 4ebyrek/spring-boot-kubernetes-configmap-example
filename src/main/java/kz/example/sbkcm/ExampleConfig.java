@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 
 @Configuration
-@PropertySource("file:/configs/application.properties")
+@PropertySource(value = "file:/configs/application.properties",ignoreResourceNotFound = true)
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
