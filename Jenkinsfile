@@ -30,7 +30,7 @@ pipeline {
         stage('********************** Extract repos from git **********************') {
             steps {
                 dir("$WORKSPACE/$PROJECT_NAME") {
-                    git branch: "develop", credentialsId: '$PROJECT_GIT_CREDENTIALID', url: "$PROJECT_REPO"
+                    git branch: "develop", credentialsId: "$PROJECT_GIT_CREDENTIAL_ID", url: "$PROJECT_REPO"
                 }
             }
         }
