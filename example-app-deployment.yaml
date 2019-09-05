@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: example-app-deployment-v1
+  labels:
+    app: example-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: example-app
+  template:
+    metadata:
+      labels:
+        app: example-app
+    spec:
+      containers:
+        - name: example-app
+          image: eldarbai/super-app-repo:47
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+          volumeMounts:
+            - name: application-config
+              mountPath: "/configs"
+              readOnly: true
+      volumes:
+        - name: application-config
+          configMap:
+            name: example-app-configmap-v1
+            items:
+              - key: application.properties
+                path: application.properties
