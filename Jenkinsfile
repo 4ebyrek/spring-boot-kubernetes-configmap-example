@@ -9,10 +9,11 @@ pipeline {
     }
 
     environment {
-        BACK_NAME = "spring-boot-kubernetes-configmap"
-        BACK_REPO = "https://github.com/4ebyrek/spring-boot-kubernetes-configmap-example.git"
-        registry = "eldarbai/spring-boot-kubernetes-configmap"
-        registryCredential = "185fc063-08bd-4d4c-9754-d369feda5eb7"
+        PROJECT_NAME = "spring-boot-kubernetes-configmap"
+        PROJECT_REPO = "https://github.com/4ebyrek/spring-boot-kubernetes-configmap-example.git"
+        PROJECT_GIT_CREDENTIAL_ID = "45172769-dda8-47d2-8177-f3bf97b7958c"
+        DOCKER_REGISTRY = "eldarbai/spring-boot-kubernetes-configmap"
+        DOCKER_REGISTRY_CREDENTIAL_ID = "185fc063-08bd-4d4c-9754-d369feda5eb7"
     }
 
     stages {
@@ -20,7 +21,7 @@ pipeline {
             steps {
                 parallel(
                         cleanWorkSpace: {
-                            sh "rm -rf $WORKSPACE/$BACK_NAME"
+                            sh "rm -rf $WORKSPACE/$PROJECT_NAME"
                         }
                 )
             }
@@ -28,28 +29,28 @@ pipeline {
 
         stage('********************** Extract repos from git **********************') {
             steps {
-                dir("$WORKSPACE/$BACK_NAME") {
-                    git branch: "develop", credentialsId: '45172769-dda8-47d2-8177-f3bf97b7958c', url: "$BACK_REPO"
+                dir("$WORKSPACE/$PROJECT_NAME") {
+                    git branch: "develop", credentialsId: '$PROJECT_GIT_CREDENTIALID', url: "$PROJECT_REPO"
                 }
             }
         }
 
         stage('********************** clean install **********************') {
             steps {
-                sh "mvn clean install -f $WORKSPACE/$BACK_NAME/pom.xml"
+                sh "mvn clean install -f $WORKSPACE/$PROJECT_NAME/pom.xml"
             }
         }
 
         stage('********************** build image **********************') {
             steps {
-                sh "docker build -t $registry:$env.BUILD_ID $WORKSPACE/$BACK_NAME"
+                sh "docker build -t $DOCKER_REGISTRY:$env.BUILD_ID $WORKSPACE/$PROJECT_NAME"
             }
         }
 
         stage('********************** push image **********************') {
             steps {
-                withDockerRegistry([credentialsId: "185fc063-08bd-4d4c-9754-d369feda5eb7", url: ""]) {
-                    sh "docker push $registry:$env.BUILD_ID"
+                withDockerRegistry([credentialsId: "$DOCKER_REGISTRY_CREDENTIAL_ID", url: ""]) {
+                    sh "docker push $DOCKER_REGISTRY:$env.BUILD_ID"
                 }
             }
         }
