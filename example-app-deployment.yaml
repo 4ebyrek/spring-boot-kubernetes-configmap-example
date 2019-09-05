@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: example-app
-          image: eldarbai/super-app-repo:47
+          image: eldarbai/spring-boot-kubernetes-configmap:4
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
