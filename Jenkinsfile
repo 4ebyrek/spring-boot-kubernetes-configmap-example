@@ -13,7 +13,7 @@ pipeline {
         PROJECT_REPO = "https://github.com/4ebyrek/spring-boot-kubernetes-configmap-example.git"
         PROJECT_GIT_CREDENTIAL_ID = "45172769-dda8-47d2-8177-f3bf97b7958c"
         DOCKER_REGISTRY = "eldarbai/spring-boot-kubernetes-configmap"
-        DOCKER_REGISTRY_CREDENTIAL_ID = "185fc063-08bd-4d4c-9754-d369feda5eb7"
+        DOCKER_REGISTRY_CREDENTIAL_ID = "162577ca-efa9-46f0-911e-8bcc64fa1635"
     }
 
     stages {
