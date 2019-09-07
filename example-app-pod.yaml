@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Pod
+metadata:
+  name: example-app-pod-v1
+  labels:
+    app: example-app
+spec:
+  containers:
+    - name: example-app
+        image: eldarbai/spring-boot-kubernetes-configmap:8
+        imagePullPolicy: Always
+        ports:
+          - containerPort: 8080
+        volumeMounts:
+          - name: application-config
+            mountPath: "/configs"
+            readOnly: true
+  volumes:
+    - name: application-config
+      configMap:
+        name: example-app-configmap-v1
+        items:
+          - key: application.properties
+            path: application.properties
