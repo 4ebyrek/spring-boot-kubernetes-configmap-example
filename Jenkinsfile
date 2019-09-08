@@ -43,7 +43,7 @@ pipeline {
 
         stage('********************** build image **********************') {
             steps {
-                sh "docker build -t $DOCKER_REGISTRY:$env.BUILD_ID $WORKSPACE/$PROJECT_NAME"
+                sh "docker build -t $DOCKER_REGISTRY $WORKSPACE/$PROJECT_NAME"
             }
         }
 
