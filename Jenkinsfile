@@ -50,7 +50,7 @@ pipeline {
         stage('********************** push image **********************') {
             steps {
                 withDockerRegistry([credentialsId: "$DOCKER_REGISTRY_CREDENTIAL_ID", url: ""]) {
-                    sh "docker push $DOCKER_REGISTRY:$env.BUILD_ID"
+                    sh "docker push $DOCKER_REGISTRY"
                 }
             }
         }
