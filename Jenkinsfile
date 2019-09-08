@@ -57,7 +57,7 @@ pipeline {
 
         stage('********************** deploy image **********************') {
             steps {
-                sh "kubectl create -f example-app-pod.yaml"
+                sh "kubectl apply -f example-app-pod.yaml"
             }
         }
 
