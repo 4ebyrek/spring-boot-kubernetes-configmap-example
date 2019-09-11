@@ -51,7 +51,7 @@ pipeline {
 
         stage('********************** push image **********************') {
             steps {
-                withDockerRegistry([credentialsId: "928c8a05-3036-48ed-ab5c-0db5b702ee7a", url: "https://10.254.101.100"]) {
+                withDockerRegistry([credentialsId: "928c8a05-3036-48ed-ab5c-0db5b702ee7a", url: "https://10.254.101.100:5000"]) {
                     sh "docker push $DOCKER_REGISTRY:$DOCKER_IMAGE_VERSION"
                 }
             }
