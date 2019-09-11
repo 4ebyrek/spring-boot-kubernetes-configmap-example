@@ -45,8 +45,8 @@ pipeline {
 
         stage('********************** clean install **********************') {
             steps {
-                docker.withRegistry('https://10.254.101.100','928c8a05-3036-48ed-ab5c-0db5b702ee7a'){
-                    docker.build("eldarbai/spring-boot-kubernetes-configmap").push('latest')
+                withRegistry('https://10.254.101.100','928c8a05-3036-48ed-ab5c-0db5b702ee7a'){
+                    docker.build("eldarbai/spring-boot-kubernetes-configmap").push('')
                 }
             }
         }
