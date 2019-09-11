@@ -37,17 +37,9 @@ pipeline {
             }
         }
 
-//        stage('********************** clean install **********************') {
-//            steps {
-//                sh "mvn clean install -f $WORKSPACE/$PROJECT_NAME/pom.xml"
-//            }
-//        }
-
         stage('********************** clean install **********************') {
             steps {
-                withRegistry('https://10.254.101.100','928c8a05-3036-48ed-ab5c-0db5b702ee7a'){
-                    docker.build("eldarbai/spring-boot-kubernetes-configmap").push('')
-                }
+                sh "mvn clean install -f $WORKSPACE/$PROJECT_NAME/pom.xml"
             }
         }
 
@@ -59,7 +51,7 @@ pipeline {
 
         stage('********************** push image **********************') {
             steps {
-                withDockerRegistry([credentialsId: "$DOCKER_REGISTRY_CREDENTIAL_ID", url: ""]) {
+                withDockerRegistry([credentialsId: "928c8a05-3036-48ed-ab5c-0db5b702ee7a", url: "https://10.254.101.100"]) {
                     sh "docker push $DOCKER_REGISTRY:$DOCKER_IMAGE_VERSION"
                 }
             }
