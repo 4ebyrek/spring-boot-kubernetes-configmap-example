@@ -19,35 +19,35 @@ pipeline {
     }
 
     stages {
-        stage('********************** Clean Workspace **********************') {
-            steps {
-                parallel(
-                        cleanWorkSpace: {
-                            sh "rm -rf $WORKSPACE/$PROJECT_NAME"
-                        }
-                )
-            }
-        }
-
-        stage('********************** Extract repos from git **********************') {
-            steps {
-                dir("$WORKSPACE/$PROJECT_NAME") {
-                    git branch: "develop", credentialsId: "$PROJECT_GIT_CREDENTIAL_ID", url: "$PROJECT_REPO"
-                }
-            }
-        }
-
-        stage('********************** clean install **********************') {
-            steps {
-                sh "mvn clean install -f $WORKSPACE/$PROJECT_NAME/pom.xml"
-            }
-        }
-
-        stage('********************** build image **********************') {
-            steps {
-                sh "docker build -t $DOCKER_REGISTRY:$DOCKER_IMAGE_VERSION $WORKSPACE/$PROJECT_NAME"
-            }
-        }
+//        stage('********************** Clean Workspace **********************') {
+//            steps {
+//                parallel(
+//                        cleanWorkSpace: {
+//                            sh "rm -rf $WORKSPACE/$PROJECT_NAME"
+//                        }
+//                )
+//            }
+//        }
+//
+//        stage('********************** Extract repos from git **********************') {
+//            steps {
+//                dir("$WORKSPACE/$PROJECT_NAME") {
+//                    git branch: "develop", credentialsId: "$PROJECT_GIT_CREDENTIAL_ID", url: "$PROJECT_REPO"
+//                }
+//            }
+//        }
+//
+//        stage('********************** clean install **********************') {
+//            steps {
+//                sh "mvn clean install -f $WORKSPACE/$PROJECT_NAME/pom.xml"
+//            }
+//        }
+//
+//        stage('********************** build image **********************') {
+//            steps {
+//                sh "docker build -t $DOCKER_REGISTRY:$DOCKER_IMAGE_VERSION $WORKSPACE/$PROJECT_NAME"
+//            }
+//        }
 
         stage('********************** push image **********************') {
             steps {
@@ -57,11 +57,11 @@ pipeline {
             }
         }
 
-        stage('********************** deploy image **********************') {
-            steps {
-                sh "kubectl apply -f $KUBERNETES_POD"
-            }
-        }
+//        stage('********************** deploy image **********************') {
+//            steps {
+//                sh "kubectl apply -f $KUBERNETES_POD"
+//            }
+//        }
 
     }
 }
