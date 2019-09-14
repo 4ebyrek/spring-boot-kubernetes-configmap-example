@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: example-app-configmap-v1
+  name: test-app-configmap
 data:
   application.properties: |-
     example.message=hello-from-configmap

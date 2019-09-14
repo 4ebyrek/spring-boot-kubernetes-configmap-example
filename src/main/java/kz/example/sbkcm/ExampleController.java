@@ -12,8 +12,8 @@ public class ExampleController {
     @Value("${example.message}")
     private String message;
 
-    @GetMapping("/message")
-    public String getMessage() throws UnknownHostException {
-        return InetAddress.getLocalHost().getHostAddress();
+    @GetMapping
+    public String getMessage(){
+        return message;
     }
 }

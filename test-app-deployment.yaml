@@ -1,33 +1,33 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: example-app-deployment-v1
+  name: test-app-deployment
   labels:
-    app: example-app
+    app: test-app
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: example-app
+      app: test-app
   template:
     metadata:
       labels:
-        app: example-app
+        app: test-app
     spec:
       containers:
-        - name: example-app
-          image: eldarbai/spring-boot-kubernetes-configmap:latest
+        - name: test-app
+          image: jenkins/test-app:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
           volumeMounts:
             - name: application-config
-              mountPath: "/configs"
+              mountPath: "/"
               readOnly: true
       volumes:
         - name: application-config
           configMap:
-            name: example-app-configmap-v1
+            name: test-app-configmap
             items:
               - key: application.properties
                 path: application.properties
