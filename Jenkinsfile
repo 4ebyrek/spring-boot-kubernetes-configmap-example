@@ -16,8 +16,8 @@ pipeline {
         DOCKER_REGISTRY = "jenkins/test-app"
         DOCKER_IMAGE_VERSION = "latest"
         DOCKER_REGISTRY_CREDENTIAL_ID = "928c8a05-3036-48ed-ab5c-0db5b702ee7a"
-        DOCKER_REGISTRY_URL = "https://10.254.101.100:5000"
-
+        DOCKER_REGISTRY_FULL_URL = "https://10.254.101.100:5000"
+        DOCKER_REGISTRY_LIGHT_URL = "10.254.101.100:5000"
         KUBERNETES_DEPLOYMENTS = "test-app-deployment.yaml"
     }
 
@@ -49,21 +49,21 @@ pipeline {
 
         stage('********************** build image **********************') {
             steps {
-                sh "docker build -t 10.254.101.100:5000/$DOCKER_REGISTRY:$DOCKER_IMAGE_VERSION $WORKSPACE/$PROJECT_NAME"
+                sh "docker build -t $DOCKER_REGISTRY_LIGHT_URL/$DOCKER_REGISTRY:$DOCKER_IMAGE_VERSION $WORKSPACE/$PROJECT_NAME"
             }
         }
 
         stage('********************** push image **********************') {
             steps {
                 withDockerRegistry([credentialsId: "$DOCKER_REGISTRY_CREDENTIAL_ID", url: "$DOCKER_REGISTRY_URL"]) {
-                    sh "docker push 10.254.101.100:5000/$DOCKER_REGISTRY:$DOCKER_IMAGE_VERSION"
+                    sh "docker push $DOCKER_REGISTRY_LIGHT_URL/$DOCKER_REGISTRY:$DOCKER_IMAGE_VERSION"
                 }
             }
         }
 
         stage('********************** deploy image **********************') {
             steps {
-                sh "kubectl apply -f $KUBERNETES_POD"
+                sh "kubectl apply -f $KUBERNETES_DEPLOYMENTS"
             }
         }
 
