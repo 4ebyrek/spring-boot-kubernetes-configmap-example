@@ -49,14 +49,14 @@ pipeline {
 
         stage('********************** build image **********************') {
             steps {
-                sh "docker build -t $DOCKER_REGISTRY:$DOCKER_IMAGE_VERSION $WORKSPACE/$PROJECT_NAME"
+                sh "docker build -t $DOCKER_REGISTRY_URL/$DOCKER_REGISTRY:$DOCKER_IMAGE_VERSION $WORKSPACE/$PROJECT_NAME"
             }
         }
 
         stage('********************** push image **********************') {
             steps {
                 withDockerRegistry([credentialsId: "$DOCKER_REGISTRY_CREDENTIAL_ID", url: "$DOCKER_REGISTRY_URL"]) {
-                    sh "docker push $DOCKER_REGISTRY:$DOCKER_IMAGE_VERSION"
+                    sh "docker push $DOCKER_REGISTRY_URL/$DOCKER_REGISTRY:$DOCKER_IMAGE_VERSION"
                 }
             }
         }
