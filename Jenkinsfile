@@ -28,6 +28,7 @@ pipeline {
                 parallel(
                     cleanWorkSpace: {
                         sh "rm -rf $WORKSPACE/$PROJECT_NAME"
+                        sh "docker system prune -f"
                     }
                 )
             }
