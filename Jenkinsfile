@@ -64,7 +64,7 @@ pipeline {
 
         stage('********************** deploy image **********************') {
             steps {
-                sh "kubectl apply -f $KUBERNETES_DEPLOYMENTS"
+                sh "kubectl create -f $KUBERNETES_DEPLOYMENTS"
             }
         }
 
