@@ -24,7 +24,6 @@ spec:
             - containerPort: 8080
           volumeMounts:
             - name: application-config
-              mountPath: "/"
               readOnly: true
       volumes:
         - name: application-config
