@@ -1,5 +1,6 @@
 FROM openjdk:8-jdk-alpine
-WORKDIR /app
-COPY target/*.jar app.jar
+RUN mkdir /usr/myapp
+COPY target/*.jar /usr/myapp/app.jar
+WORKDIR /usr/myapp
 EXPOSE 8080
-ENTRYPOINT ["java", "-jar", "app.jar"]
+CMD ["java", "-Xms128m", "-Xmx256m", "-jar", "app.jar"]
