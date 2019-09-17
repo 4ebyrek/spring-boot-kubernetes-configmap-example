@@ -14,6 +14,8 @@ spec:
       labels:
         app: test-app
     spec:
+      imagePullSecrets:
+        - name: test-private-registry
       containers:
         - name: test-app
           image: 10.254.101.100:5000/jenkins/test-app:latest
