@@ -9,7 +9,7 @@ import java.net.UnknownHostException;
 
 @RestController
 public class ExampleController {
-    @Value("${example.message}")
+    @Value("${message}")
     private String message;
 
     @GetMapping
