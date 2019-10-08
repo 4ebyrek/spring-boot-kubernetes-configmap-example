@@ -1,0 +1,7 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: pgdb
+spec:
+  type: ExternalName
+  externalName: 10.253.200.154
