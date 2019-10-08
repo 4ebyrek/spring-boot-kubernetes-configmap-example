@@ -45,7 +45,7 @@ pipeline {
 
         stage('********************** clean install **********************') {
             steps {
-                sh "mvn clean install -f $WORKSPACE/$PROJECT_NAME/pom.xml"
+                sh "mvn clean install -DskipTests -f $WORKSPACE/$PROJECT_NAME/pom.xml"
             }
         }
 
