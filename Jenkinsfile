@@ -63,12 +63,12 @@ pipeline {
             }
         }
 
-        stage('********************** Deploy Image **********************') {
-            steps {
-                sh "kubectl create -f $WORKSPACE/$PROJECT_NAME/$KUBERNETES_SERVICE"
-                sh "kubectl create -f $WORKSPACE/$PROJECT_NAME/$KUBERNETES_DEPLOYMENTS"
-            }
-        }
+//        stage('********************** Deploy Image **********************') {
+//            steps {
+//                sh "kubectl create -f $WORKSPACE/$PROJECT_NAME/$KUBERNETES_SERVICE"
+//                sh "kubectl create -f $WORKSPACE/$PROJECT_NAME/$KUBERNETES_DEPLOYMENTS"
+//            }
+//        }
 
     }
 }
