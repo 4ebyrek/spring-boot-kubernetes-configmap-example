@@ -22,6 +22,9 @@ public class ExampleController {
     @Autowired
     DataSource dataSource;
 
+    @Value("${example.message}")
+    String message;
+
     @GetMapping
     public String getMessage() throws SQLException {
         Connection connection = dataSource.getConnection();
@@ -31,6 +34,6 @@ public class ExampleController {
         ResultSet rs = clb.executeQuery();
         rs.next();
         System.out.println("name = "+ rs.getString("name"));
-        return env.getProperty("example.message");
+        return env.getProperty("example.message") + message;
     }
 }
