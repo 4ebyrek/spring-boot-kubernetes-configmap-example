@@ -48,6 +48,20 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
         </plugins>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <excludes>
+                    <exclude>**/*.properties</exclude>
+                </excludes>
+                <filtering>true</filtering>
+            </resource>
+            <resource>
+                <directory>${basedir}/k8s/</directory>
+                <targetPath>${basedir}/</targetPath>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
     </build>
 
 </project>
