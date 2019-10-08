@@ -56,11 +56,6 @@
                 </excludes>
                 <filtering>true</filtering>
             </resource>
-            <resource>
-                <directory>${basedir}/k8s/</directory>
-                <targetPath>${basedir}/</targetPath>
-                <filtering>true</filtering>
-            </resource>
         </resources>
     </build>
 
