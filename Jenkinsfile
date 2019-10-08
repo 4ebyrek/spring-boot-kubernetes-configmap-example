@@ -16,9 +16,10 @@ pipeline {
         DOCKER_REGISTRY = "jenkins/test-app"
         DOCKER_IMAGE_VERSION = "latest"
         DOCKER_REGISTRY_CREDENTIAL_ID = "928c8a05-3036-48ed-ab5c-0db5b702ee7a"
-        DOCKER_REGISTRY_FULL_URL = "https://10.254.101.100:5000"
-        DOCKER_REGISTRY_LIGHT_URL = "10.254.101.100:5000"
+        DOCKER_REGISTRY_FULL_URL = "https://vtb-registry.kz:5000"
+        DOCKER_REGISTRY_LIGHT_URL = "vtb-registry.kz:5000"
         KUBERNETES_DEPLOYMENTS = "test-app-deployment.yaml"
+        KUBERNETES_SERVICE = "test-app-service.yaml"
     }
 
     stages {
@@ -62,9 +63,10 @@ pipeline {
             }
         }
 
-        stage('********************** deploy image **********************') {
+        stage('********************** Deploy Image **********************') {
             steps {
-                sh "kubectl create -f $KUBERNETES_DEPLOYMENTS"
+                sh "kubectl create -f $WORKSPACE/$PROJECT_NAME/$KUBERNETES_SERVICE"
+                sh "kubectl create -f $WORKSPACE/$PROJECT_NAME/$KUBERNETES_DEPLOYMENTS"
             }
         }
 
