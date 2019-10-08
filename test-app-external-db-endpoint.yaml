@@ -1,0 +1,9 @@
+kind: Endpoints
+apiVersion: v1
+metadata:
+  name: pgdb
+subsets:
+  - addresses:
+      - ip: 10.253.200.154
+    ports:
+      - port: 5432
